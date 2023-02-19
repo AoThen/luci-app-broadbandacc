@@ -96,7 +96,7 @@ gen_http_cmd() {
 
 # 获取网络带宽信息
 isp_bandwidth() {
-	json_cleanup; json_load "$(wget-ssl -q -O - $_http_cmd2 --bind-address=$_bind_ip)"
+	json_cleanup; json_load "$(wget -q -O - $_http_cmd2 --bind-address=$_bind_ip)"
 	local _code
 	json_get_var _code "code"
 	
@@ -110,7 +110,7 @@ isp_bandwidth() {
 	_log "网络异常，请重启插件"
 	fi
 	
-	json_cleanup; json_load "$(wget-ssl -q -O - $_http_cmd --bind-address=$_bind_ip)"
+	json_cleanup; json_load "$(wget -q -O - $_http_cmd --bind-address=$_bind_ip)"
 	#无法提速
 	json_select "data"
 	json_select "indexInfo"
@@ -217,7 +217,7 @@ _keepalive() {
 	network=$(uci get "broadband.general.network" 2> /dev/null)
 
 	#获取出口ip
-	json_cleanup; json_load "$(wget-ssl -q -O - $_http_cmd1)"
+	json_cleanup; json_load "$(wget -q -O - $_http_cmd1)"
 	json_select "data"
 	json_get_var _publicnet_ip "ip"
 	#断网睡眠
@@ -330,7 +330,7 @@ broadband_init() {
 	_log "宽带助手正在启动..."
 
 	# 检查外部调用工具
-	command -v wget-ssl >/dev/null || { _log "GNU Wget 未安装,尝试安装中...请重启插件"; opkg update; opkg install wget; return 3; }
+	command -v wget >/dev/null || { _log "GNU Wget 未安装,尝试安装中...请重启插件"; opkg update; opkg install wget; return 3; }
 
 	# 捕获中止信号
 	trap 'sigterm' INT # Ctrl-C
