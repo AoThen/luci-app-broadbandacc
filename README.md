@@ -6,3 +6,10 @@
 <br/>多接口并行提速 --新建
 <br/>设备限速 --新建
 ![KA5 DR@L1 Z))2$1 N SI G](https://user-images.githubusercontent.com/76506087/218954542-9d2ea662-ed96-44f4-a70e-5fd11b52bdfa.png)
+
+# 其他项目
+https://github.com/net21/speedtest_cn
+
+https://github.com/youshandefeiyang/SpeedTestCN-Auto
+
+https://github.com/edgist/autoAcc
