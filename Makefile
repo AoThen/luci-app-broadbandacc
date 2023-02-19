@@ -15,7 +15,7 @@ PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/luci-app-broadbandacc
+define Package/$(PKG_NAME)
 	SECTION:=luci
 	CATEGORY:=LuCI
 	SUBMENU:=3. Applications
@@ -24,7 +24,7 @@ define Package/luci-app-broadbandacc
 	PKGARCH:=all
 endef
 
-define Package/luci-app-broadbandacc/description
+define Package/$(PKG_NAME)/description
  Broadband uplink and downlink acceleration functions.
 endef
 
@@ -37,16 +37,16 @@ endef
 define Build/Compile
 endef
 
-define Package/luci-app-broadbandacc/postinst
+define Package/$(PKG_NAME)/postinst
 #!/bin/sh
 if [ -z "$${IPKG_INSTROOT}" ]; then
-	( . /etc/uci-defaults/luci-app-broadbandacc ) && rm -f /etc/uci-defaults/luci-app-broadbandacc
+	( . /etc/uci-defaults/$(PKG_NAME) ) && rm -f /etc/uci-defaults/$(PKG_NAME)
 	rm -f /tmp/luci-indexcache
 fi
 exit 0
 endef
 
-define Package/luci-app-broadbandacc/install
+define Package/$(PKG_NAME)/install
 	$(INSTALL_DIR) $(1)/etc/uci-defaults
 	$(INSTALL_DIR) $(1)/etc/hotplug.d/iface
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/controller
@@ -58,7 +58,7 @@ define Package/luci-app-broadbandacc/install
 	$(INSTALL_DIR) $(1)/etc/config
 	$(INSTALL_DIR) $(1)/etc/init.d  
 
-	$(INSTALL_BIN) ./files/root/etc/uci-defaults/luci-broadband $(1)/etc/uci-defaults/luci-app-broadbandacc
+	$(INSTALL_BIN) ./files/root/etc/uci-defaults/luci-broadband $(1)/etc/uci-defaults/$(PKG_NAME)
 	$(INSTALL_BIN) ./files/root/etc/hotplug.d/iface/99-broadband $(1)/etc/hotplug.d/iface/99-broadband
 	$(INSTALL_DATA) ./files/luci/controller/broadband.lua $(1)/usr/lib/lua/luci/controller/broadband.lua
 	$(INSTALL_DATA) ./files/luci/model/cbi/broadband.lua $(1)/usr/lib/lua/luci/model/cbi/broadband.lua
@@ -72,4 +72,4 @@ define Package/luci-app-broadbandacc/install
 	$(INSTALL_BIN) ./files/root/etc/init.d/broadband $(1)/etc/init.d/broadband
 endef
 
-$(eval $(call BuildPackage,luci-app-broadbandacc))
+$(eval $(call BuildPackage,$(PKG_NAME)))
