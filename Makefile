@@ -1,10 +1,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-broadbandacc
-PKG_VERSION:=1.8-s
-PKG_RELEASE:=1
+PKG_VERSION:=2.0-s
+PKG_RELEASE:=2
 
-PKG_MAINTAINER:=NaNa <484154383@qq.com>
+PKG_MAINTAINER:=Na
 PKG_LICENSE:=GPLv3
 PKG_LICENSE_FILES:=LICENSE
  
@@ -19,7 +19,7 @@ define Package/$(PKG_NAME)
 	SECTION:=luci
 	CATEGORY:=LuCI
 	SUBMENU:=3. Applications
-	TITLE:=broadband accelerate.
+	TITLE:=broadband accelerate
 	DEPENDS:=+jshn +wget-ssl
 	PKGARCH:=all
 endef
